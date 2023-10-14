@@ -9,6 +9,7 @@ declare global {
       'ion-icon': React.DetailedHTMLProps<
         React.HTMLAttributes<HTMLElement> & {
           name: string;
+          size?: string;
         },
         HTMLElement
       >;
