@@ -1,6 +1,7 @@
 import Link from 'next/link';
 
 export default function Home() {
+  const icons = ['logo-github', 'logo-linkedin', 'logo-instagram'];
   return (
     <>
       <header>
@@ -14,6 +15,13 @@ export default function Home() {
           I build accessible, inclusive products and digital experiences for the
           web.
         </p>
+        <ul>
+          {icons.map((icon) => (
+            <li key={icon}>
+              <ion-icon name={icon} />
+            </li>
+          ))}
+        </ul>
       </header>
     </>
   );

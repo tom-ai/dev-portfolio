@@ -3,6 +3,19 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import Script from 'next/script';
 
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      'ion-icon': React.DetailedHTMLProps<
+        React.HTMLAttributes<HTMLElement> & {
+          name: string;
+        },
+        HTMLElement
+      >;
+    }
+  }
+}
+
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
