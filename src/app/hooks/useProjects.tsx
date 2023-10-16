@@ -6,8 +6,9 @@ export default function (): Project[] {
     title: 'Developer Portfolio',
     description: 'A Next.js developer portfolio.',
     tools: ['Next.js', 'Tailwind CSS', 'TypeScript'],
-    url: '
-  }
+    url: 'https://github.com/tom-ai/dev-portfolio',
+    imageUrl: 'https://source.unsplash.com/photos/95YRwf6CNw8',
+  };
 
   const linkShortener: Project = {
     id: 1,
@@ -28,8 +29,7 @@ export default function (): Project[] {
       'https://github.com/tom-ai/th-news/blob/main/src/assets/th-news-1.png?raw=true',
   };
 
-
-  const projects: Project[] = [linkShortener, ncNews];
+  const projects: Project[] = [developerPortfolio, linkShortener, ncNews];
 
   return projects;
 }
