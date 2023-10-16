@@ -1,6 +1,14 @@
 import { Project } from '../models/project';
 
 export default function (): Project[] {
+  const developerPortfolio: Project = {
+    id: 0,
+    title: 'Developer Portfolio',
+    description: 'A Next.js developer portfolio.',
+    tools: ['Next.js', 'Tailwind CSS', 'TypeScript'],
+    url: '
+  }
+
   const linkShortener: Project = {
     id: 1,
     title: 'Link Shortener',
@@ -19,6 +27,7 @@ export default function (): Project[] {
     imageUrl:
       'https://github.com/tom-ai/th-news/blob/main/src/assets/th-news-1.png?raw=true',
   };
+
 
   const projects: Project[] = [linkShortener, ncNews];
 
