@@ -1,6 +1,6 @@
 import { Experience } from '../models/experience';
 
-export default function useExperience() {
+export default function useExperience(): Experience[] {
   const openMoney: Experience = {
     id: 1,
     title: 'Software Developer',

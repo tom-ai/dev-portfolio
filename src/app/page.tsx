@@ -1,11 +1,13 @@
 import Link from 'next/link';
 import useExperience from './hooks/useExperience';
-import { Experience } from './models/experience';
+import Pill from './components/Pill';
+import useProjects from './hooks/useProjects';
 
 export default function Home() {
   const icons = ['logo-github', 'logo-linkedin', 'logo-instagram'];
 
-  const experience: Experience[] = useExperience();
+  const experience = useExperience();
+  const projects = useProjects();
 
   return (
     <>
@@ -48,37 +50,69 @@ export default function Home() {
           {experience.map((experience) => {
             return (
               <div key={experience.id} className="mt-6">
-                <a href={experience.url} target="_blank" rel="noreferrer">
-                  <p className="mt-1 mb-2 uppercase text-sm font-bold tracking-wide">
-                    {experience.from.toLocaleDateString('en-GB', {
-                      month: 'short',
-                      year: 'numeric',
-                    })}{' '}
-                    -{' '}
-                    {experience.current
-                      ? 'Present'
-                      : experience.to.toLocaleDateString('en-GB', {
-                          month: 'short',
-                          year: 'numeric',
-                        })}
-                  </p>
-                  <h4 className="text-slate-200 font-medium tracking-tight text-xl">
+                <p className="mt-1 mb-2 uppercase text-sm font-bold tracking-wide">
+                  {experience.from.toLocaleDateString('en-GB', {
+                    month: 'short',
+                    year: 'numeric',
+                  })}{' '}
+                  -{' '}
+                  {experience.current
+                    ? 'Present'
+                    : experience.to.toLocaleDateString('en-GB', {
+                        month: 'short',
+                        year: 'numeric',
+                      })}
+                </p>
+                <h4 className="hover:underline text-slate-200 font-medium tracking-tight text-xl">
+                  <a href={experience.url} target="_blank" rel="noreferrer">
                     {experience.title} {'•'} {experience.company}
-                  </h4>
-
-                  <p className="mt-2">{experience.description}</p>
-                  <ul>
-                    {experience.tools &&
-                      experience.tools.map((tool) => (
-                        <li key={tool}>{tool}</li>
-                      ))}
-                  </ul>
-                </a>
+                  </a>
+                </h4>
+                <p className="mt-2 text-sm">{experience.description}</p>
+                <ul className="flex flex-wrap mt-2">
+                  {experience.tools &&
+                    experience.tools.map((tool) => (
+                      <li key={tool}>
+                        <Pill text={tool} />
+                      </li>
+                    ))}
+                </ul>
+              </div>
+            );
+          })}
+        </section>
+        <section id="projects">
+          <h3 className="mt-16 text-sm tracking-widest uppercase font-bold text-slate-200">
+            Projects
+          </h3>
+          {projects.map((project) => {
+            return (
+              <div key={project.id} className="mt-6">
+                <h4 className="hover:underline text-slate-200 font-medium tracking-tight text-xl">
+                  <a href={project.url} target="_blank" rel="noreferrer">
+                    {project.title}{' '}
+                  </a>
+                </h4>
+                <p className="mt-2 text-sm">{project.description}</p>
+                <ul className="flex flex-wrap mt-2">
+                  {project.tools &&
+                    project.tools.map((tool) => (
+                      <li key={tool}>
+                        <Pill text={tool} />
+                      </li>
+                    ))}
+                </ul>
               </div>
             );
           })}
         </section>
       </main>
+      <footer className="mt-16 text-sm">
+        <p>
+          I hope you've enjoyed my webite! Built with Next.js and Tailwind CSS,
+          depoloyed on Vercel.
+        </p>
+      </footer>
     </>
   );
 }
