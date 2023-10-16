@@ -1,6 +1,6 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Inter, Inconsolata } from 'next/font/google';
 import Script from 'next/script';
 
 declare global {
@@ -18,6 +18,7 @@ declare global {
 }
 
 const inter = Inter({ subsets: ['latin'] });
+const inconsolata = Inconsolata({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'Tom Harris',
@@ -32,7 +33,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.className} antialiased text-slate-400 container mx-auto bg-slate-900 py-12 md:py-20 px-6`}
+        className={`${inconsolata.className} selection:bg-enchantedMeadow-800 selection:text-enchantedMeadow-100 antialiased text-black container mx-auto bg-enchantedMeadow-300 py-12 md:py-20 px-6`}
       >
         {children}
       </body>

@@ -3,6 +3,9 @@ import useExperience from './hooks/useExperience';
 import Pill from './components/Pill';
 import useProjects from './hooks/useProjects';
 import Image from 'next/image';
+import { Karla } from 'next/font/google';
+
+const karla = Karla({ subsets: ['latin'] });
 
 export default function Home() {
   const icons = ['logo-github', 'logo-linkedin', 'logo-instagram'];
@@ -13,10 +16,12 @@ export default function Home() {
   return (
     <>
       <header>
-        <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-slate-200">
+        <h1
+          className={`${karla.className} text-4xl md:text-5xl font-bold tracking-tighter`}
+        >
           <Link href={'/'}>Tom Harris</Link>
         </h1>
-        <h2 className="text-slate-200 mt-3 tracking-tight font-medium text-lg md:text-xl">
+        <h2 className={`mt-3 tracking-tight font-medium text-lg md:text-xl`}>
           Software Developer
         </h2>
         <p className="mt-4 max-w-sm">
@@ -31,12 +36,14 @@ export default function Home() {
           ))}
         </ul>
       </header>
-      <main className="pt-24">
-        <section id="about">
-          <h3 className=" text-sm tracking-widest uppercase font-bold text-slate-200">
+      <main>
+        <section id="about" className="py-12">
+          <h3
+            className={`${karla.className} mb-6 text-md tracking-widest uppercase font-bold `}
+          >
             About
           </h3>
-          <p className="mt-3">
+          <p>
             Experienced software developer with a background in both back-end
             and front-end development, including React and .NET technologies. I
             enjoy the creativity and stimulation of coding, and thrive on the
@@ -44,14 +51,23 @@ export default function Home() {
             new position to continue learning and development.
           </p>
         </section>
-        <section id="experience">
-          <h3 className="mt-16 text-sm tracking-widest uppercase font-bold text-slate-200">
+        <section id="experience" className="py-12">
+          <h3
+            className={`${karla.className} mb-6 text-md tracking-widest uppercase font-bold `}
+          >
             Experience
           </h3>
-          {experience.map((experience) => {
+          {experience.map((experience, index) => {
             return (
-              <div key={experience.id} className="mt-6 md:grid md: grid-cols-8">
-                <p className="md:col-span-2 mt-1 mb-2 uppercase text-xs font-bold tracking-wide text-slate-500">
+              <div
+                key={experience.id}
+                className="mb-12 last:mb-0 md:grid md: grid-cols-8"
+              >
+                <p
+                  className={
+                    'md:col-span-2 mt-1 mb-2 uppercase text-sm font-bold text-enchantedMeadow-800'
+                  }
+                >
                   {experience.from.toLocaleDateString('en-GB', {
                     month: 'short',
                     year: 'numeric',
@@ -64,13 +80,15 @@ export default function Home() {
                         year: 'numeric',
                       })}
                 </p>
-                <div className="col-span-6">
-                  <h4 className="hover:underline text-slate-200 font-medium tracking-tight text-lg">
+                <div className="md:col-span-6">
+                  <h4
+                    className={`${karla.className} hover:underline font-medium tracking-tight text-xl`}
+                  >
                     <a href={experience.url} target="_blank" rel="noreferrer">
                       {experience.title} {'•'} {experience.company}
                     </a>
                   </h4>
-                  <p className="mt-2 text-sm">{experience.description}</p>
+                  <p className="mt-2">{experience.description}</p>
                   <ul className="flex flex-wrap mt-2">
                     {experience.tools &&
                       experience.tools.map((tool) => (
@@ -84,33 +102,42 @@ export default function Home() {
             );
           })}
         </section>
-        <section id="projects">
-          <h3 className="mt-16 text-sm tracking-widest uppercase font-bold text-slate-200">
+        <section id="projects" className="py-12">
+          <h3
+            className={`${karla.className} mb-6 text-md tracking-widest uppercase font-bold`}
+          >
             Projects
           </h3>
           {projects.map((project) => {
             return (
-              <div key={project.id} className="mt-6">
-                <h4 className="hover:underline text-slate-200 font-medium tracking-tight text-lg">
-                  <a href={project.url} target="_blank" rel="noreferrer">
-                    {project.title}{' '}
-                  </a>
-                </h4>
-                <p className="mt-2 text-sm">{project.description}</p>
-                <ul className="flex flex-wrap mt-2">
-                  {project.tools &&
-                    project.tools.map((tool) => (
-                      <li key={tool}>
-                        <Pill text={tool} />
-                      </li>
-                    ))}
-                </ul>
+              <div
+                key={project.id}
+                className="mb-12 last:mb-0 md:grid md:grid-cols-8"
+              >
+                <div className="md:col-span-6">
+                  <h4
+                    className={`${karla.className} hover:underline font-medium tracking-tight text-xl`}
+                  >
+                    <a href={project.url} target="_blank" rel="noreferrer">
+                      {project.title}{' '}
+                    </a>
+                  </h4>
+                  <p className="mt-2">{project.description}</p>
+                  <ul className="flex flex-wrap mt-2">
+                    {project.tools &&
+                      project.tools.map((tool) => (
+                        <li key={tool}>
+                          <Pill text={tool} />
+                        </li>
+                      ))}
+                  </ul>
+                </div>
                 <Image
                   src={project.imageUrl}
                   alt={project.title}
                   width={150}
                   height={100}
-                  className="mt-4 rounded-md border-slate-600 border-2"
+                  className="md:col-span-2 md:order-first mt-4 rounded-md border-enchantedMeadow-700 border-2"
                 />
               </div>
             );
