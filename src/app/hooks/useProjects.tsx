@@ -7,6 +7,7 @@ export default function (): Project[] {
     description: 'A simple link generator built with React and TypeScript.',
     tools: ['React', 'TypeScript', 'Jest', 'React Testing Library'],
     url: 'https://github.com/tom-ai/link-shortener',
+    imageUrl: 'https://source.unsplash.com/photos/95YRwf6CNw8',
   };
 
   const ncNews: Project = {
@@ -15,6 +16,8 @@ export default function (): Project[] {
     description: 'A Reddit-style news aggregator .',
     tools: ['Express', 'React', 'Express', 'Jest'],
     url: 'https://github.com/tom-ai/th-news',
+    imageUrl:
+      'https://github.com/tom-ai/th-news/blob/main/src/assets/th-news-1.png?raw=true',
   };
 
   const projects: Project[] = [linkShortener, ncNews];

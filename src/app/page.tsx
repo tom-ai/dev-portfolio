@@ -2,6 +2,7 @@ import Link from 'next/link';
 import useExperience from './hooks/useExperience';
 import Pill from './components/Pill';
 import useProjects from './hooks/useProjects';
+import Image from 'next/image';
 
 export default function Home() {
   const icons = ['logo-github', 'logo-linkedin', 'logo-instagram'];
@@ -12,10 +13,10 @@ export default function Home() {
   return (
     <>
       <header>
-        <h1 className="text-4xl font-bold tracking-tight text-slate-200">
+        <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-slate-200">
           <Link href={'/'}>Tom Harris</Link>
         </h1>
-        <h2 className="text-slate-200 mt-3 tracking-tight font-medium text-lg">
+        <h2 className="text-slate-200 mt-3 tracking-tight font-medium text-lg md:text-xl">
           Software Developer
         </h2>
         <p className="mt-4 max-w-sm">
@@ -49,8 +50,8 @@ export default function Home() {
           </h3>
           {experience.map((experience) => {
             return (
-              <div key={experience.id} className="mt-6">
-                <p className="mt-1 mb-2 uppercase text-sm font-bold tracking-wide">
+              <div key={experience.id} className="mt-6 md:grid md: grid-cols-8">
+                <p className="md:col-span-2 mt-1 mb-2 uppercase text-xs font-bold tracking-wide text-slate-500">
                   {experience.from.toLocaleDateString('en-GB', {
                     month: 'short',
                     year: 'numeric',
@@ -63,20 +64,22 @@ export default function Home() {
                         year: 'numeric',
                       })}
                 </p>
-                <h4 className="hover:underline text-slate-200 font-medium tracking-tight text-xl">
-                  <a href={experience.url} target="_blank" rel="noreferrer">
-                    {experience.title} {'•'} {experience.company}
-                  </a>
-                </h4>
-                <p className="mt-2 text-sm">{experience.description}</p>
-                <ul className="flex flex-wrap mt-2">
-                  {experience.tools &&
-                    experience.tools.map((tool) => (
-                      <li key={tool}>
-                        <Pill text={tool} />
-                      </li>
-                    ))}
-                </ul>
+                <div className="col-span-6">
+                  <h4 className="hover:underline text-slate-200 font-medium tracking-tight text-lg">
+                    <a href={experience.url} target="_blank" rel="noreferrer">
+                      {experience.title} {'•'} {experience.company}
+                    </a>
+                  </h4>
+                  <p className="mt-2 text-sm">{experience.description}</p>
+                  <ul className="flex flex-wrap mt-2">
+                    {experience.tools &&
+                      experience.tools.map((tool) => (
+                        <li key={tool}>
+                          <Pill text={tool} />
+                        </li>
+                      ))}
+                  </ul>
+                </div>
               </div>
             );
           })}
@@ -88,7 +91,7 @@ export default function Home() {
           {projects.map((project) => {
             return (
               <div key={project.id} className="mt-6">
-                <h4 className="hover:underline text-slate-200 font-medium tracking-tight text-xl">
+                <h4 className="hover:underline text-slate-200 font-medium tracking-tight text-lg">
                   <a href={project.url} target="_blank" rel="noreferrer">
                     {project.title}{' '}
                   </a>
@@ -102,6 +105,13 @@ export default function Home() {
                       </li>
                     ))}
                 </ul>
+                <Image
+                  src={project.imageUrl}
+                  alt={project.title}
+                  width={150}
+                  height={100}
+                  className="mt-4 rounded-md border-slate-600 border-2"
+                />
               </div>
             );
           })}

@@ -32,7 +32,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.className} antialiased text-slate-400 container mx-auto bg-slate-900 py-12 px-6`}
+        className={`${inter.className} antialiased text-slate-400 container mx-auto bg-slate-900 py-12 md:py-20 px-6`}
       >
         {children}
       </body>
