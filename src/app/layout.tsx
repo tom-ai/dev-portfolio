@@ -33,7 +33,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inconsolata.className} selection:bg-enchantedMeadow-800 selection:text-enchantedMeadow-100 antialiased text-black container mx-auto bg-enchantedMeadow-300 py-12 md:py-20 px-6`}
+        className={`${inconsolata.className} selection:bg-enchantedMeadow-800 selection:text-enchantedMeadow-100 antialiased text-black bg-enchantedMeadow-300 `}
       >
         {children}
       </body>
