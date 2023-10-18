@@ -148,11 +148,11 @@ export default function Home() {
               );
             })}
           </section>
-          <footer className="mt-16 text-sm">
-            <p>
+          <footer className="mt-16">
+            <small>
               I hope you've enjoyed my webite! Built with Next.js and Tailwind
               CSS, depoloyed on Vercel.
-            </p>
+            </small>
           </footer>
         </main>
       </div>
