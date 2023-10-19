@@ -7,7 +7,7 @@ export default function Navigation({
   navigationLinks: navigationLink[];
 }) {
   return (
-    <nav className="hidden lg:block lg:mt-8">
+    <nav className="hidden lg:block lg:mt-12">
       <ul className="flex flex-col gap-2">
         {navigationLinks.map((link, i) => (
           <li key={`link${i}`}>
