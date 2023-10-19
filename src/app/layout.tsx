@@ -1,23 +1,7 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import { Inter, Inconsolata } from 'next/font/google';
-import Script from 'next/script';
+import { Inconsolata } from 'next/font/google';
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      'ion-icon': React.DetailedHTMLProps<
-        React.HTMLAttributes<HTMLElement> & {
-          name: string;
-          size?: string;
-        },
-        HTMLElement
-      >;
-    }
-  }
-}
-
-const inter = Inter({ subsets: ['latin'] });
 const inconsolata = Inconsolata({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
@@ -37,14 +21,6 @@ export default function RootLayout({
       >
         {children}
       </body>
-      <Script
-        type="module"
-        src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
-      />
-      <Script
-        noModule
-        src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
-      />
     </html>
   );
 }
