@@ -4,45 +4,20 @@ import Pill from './components/Pill';
 import useProjects from './hooks/useProjects';
 import Image from 'next/image';
 import { Karla } from 'next/font/google';
+import Header from './components/header/Header';
 
 const karla = Karla({ subsets: ['latin'] });
 
 export default function Home() {
-  const icons = ['logo-github', 'logo-linkedin', 'logo-instagram'];
-
   const experience = useExperience();
   const projects = useProjects();
 
   return (
     <div className="min-h-screen max-w-screen-xl mx-auto px-6">
       <div className="lg:flex lg:gap-8 lg:justify-between">
-        <header className="lg:sticky lg:py-24 py-12 md:py-12 lg:top-0 lg:flex lg:max-h-screen lg:w-1/2 lg:flex-col lg:justify-between">
-          <div>
-            <h1
-              className={`${karla.className} text-4xl md:text-5xl font-bold tracking-tighter`}
-            >
-              <Link href={'/'}>Tom Harris</Link>
-            </h1>
-            <h2
-              className={`mt-3 tracking-tight font-medium text-lg md:text-xl`}
-            >
-              Software Developer
-            </h2>
-            <p className="mt-4 max-w-sm">
-              I build accessible, inclusive products and digital experiences for
-              the web.
-            </p>
-          </div>
-          <ul className="flex flex-row gap-3 mt-8">
-            {icons.map((icon) => (
-              <li key={icon}>
-                <ion-icon style={{ fontSize: '24px' }} name={icon} />
-              </li>
-            ))}
-          </ul>
-        </header>
+        <Header />
         <main className="lg:w-1/2 lg:py-24">
-          <section id="about" className="py-12 lg:py-0">
+          <section id="about" className="py-12 lg:pt-0">
             <h3
               className={`${karla.className} lg:hidden  mb-6 text-md tracking-widest uppercase font-bold `}
             >
@@ -62,10 +37,10 @@ export default function Home() {
             >
               Experience
             </h3>
-            {experience.map((experience, index) => {
+            {experience.map((experience, i) => {
               return (
                 <div
-                  key={experience.id}
+                  key={`experience${i.toString()}`}
                   className="mb-12 last:mb-0 md:grid md:grid-cols-8 md:gap-4"
                 >
                   <p
@@ -96,8 +71,8 @@ export default function Home() {
                     <p className="mt-2">{experience.description}</p>
                     <ul className="flex flex-wrap mt-2">
                       {experience.tools &&
-                        experience.tools.map((tool) => (
-                          <li key={tool}>
+                        experience.tools.map((tool, i) => (
+                          <li key={`tool${i.toString()}`}>
                             <Pill text={tool} />
                           </li>
                         ))}
@@ -113,10 +88,10 @@ export default function Home() {
             >
               Projects
             </h3>
-            {projects.map((project) => {
+            {projects.map((project, i) => {
               return (
                 <div
-                  key={project.id}
+                  key={`project${i.toString()}`}
                   className="mb-12 last:mb-0 md:grid md:grid-cols-8 md:gap-4"
                 >
                   <div className="md:col-span-6">
@@ -130,8 +105,8 @@ export default function Home() {
                     <p className="mt-2">{project.description}</p>
                     <ul className="flex flex-wrap mt-2">
                       {project.tools &&
-                        project.tools.map((tool) => (
-                          <li key={tool}>
+                        project.tools.map((tool, j) => (
+                          <li key={`tool${j}`}>
                             <Pill text={tool} />
                           </li>
                         ))}
@@ -148,10 +123,11 @@ export default function Home() {
               );
             })}
           </section>
-          <footer className="mt-16">
+          <footer className="py-12 lg:pb-0">
             <small>
-              I hope you've enjoyed my webite! Built with Next.js and Tailwind
-              CSS, depoloyed on Vercel.
+              I hope you've enjoyed my website! Built with{' '}
+              <strong>Next.js</strong> and <strong>Tailwind CSS</strong>,
+              deployed on <strong>Vercel</strong>.
             </small>
           </footer>
         </main>
