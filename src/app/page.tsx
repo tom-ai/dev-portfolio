@@ -1,17 +1,34 @@
-import Link from 'next/link';
-import useExperience from './hooks/useExperience';
-import Pill from './components/Pill';
 import useProjects from './hooks/useProjects';
+import Pill from './components/Pill';
 import Image from 'next/image';
 import { Karla } from 'next/font/google';
 import Header from './components/header/Header';
+import useAppData from './hooks/useAppData';
+import ExperienceList from './components/ExperienceList';
+import { WorkExperience } from './models/strapi/models';
 
 const karla = Karla({ subsets: ['latin'] });
 
-export default function Home() {
-  const experience = useExperience();
-  const projects = useProjects();
+async function getExperiences(): Promise<{ data: WorkExperience[] }> {
+  // udpate to revalidate every 1 hour
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_STRAPI_URL}/work-experiences?populate=*`,
+    {
+      cache: 'no-cache',
+    }
+  );
+  if (!res.ok) {
+    throw new Error('Failed to fetch experiences');
+  }
+  return res.json();
+}
 
+export default async function Home() {
+  const { about } = useAppData();
+
+  const experiences = await getExperiences();
+
+  console.log(experiences.data);
   return (
     <>
       <div className="min-h-screen max-w-screen-xl mx-auto px-6">
@@ -24,14 +41,7 @@ export default function Home() {
               >
                 About
               </h3>
-              <p>
-                Experienced software developer with a background in both
-                back-end and front-end development, including React and .NET
-                technologies. I enjoy the creativity and stimulation of coding,
-                and thrive on the collaborative benefits of working in an agile
-                environment. Seeking a new position to continue learning and
-                development.
-              </p>
+              <p>{about}</p>
             </section>
             <section id="experience" className="py-12">
               <h3
@@ -39,54 +49,7 @@ export default function Home() {
               >
                 Experience
               </h3>
-              {experience.map((experience, i) => {
-                return (
-                  <div
-                    key={`experience${i.toString()}`}
-                    className="mb-12 last:mb-0 md:grid md:grid-cols-8 md:gap-4"
-                  >
-                    <p
-                      className={
-                        'md:col-span-2 mt-1 mb-2 uppercase text-sm font-bold text-enchantedMeadow-800'
-                      }
-                    >
-                      {experience.from.toLocaleDateString('en-GB', {
-                        month: 'short',
-                        year: 'numeric',
-                      })}{' '}
-                      -{' '}
-                      {experience.current
-                        ? 'Present'
-                        : experience.to.toLocaleDateString('en-GB', {
-                            month: 'short',
-                            year: 'numeric',
-                          })}
-                    </p>
-                    <div className="md:col-span-6">
-                      <h4
-                        className={`${karla.className} hover:underline font-medium tracking-tight text-xl`}
-                      >
-                        <a
-                          href={experience.url}
-                          target="_blank"
-                          rel="noreferrer"
-                        >
-                          {experience.title} {'•'} {experience.company}
-                        </a>
-                      </h4>
-                      <p className="mt-2">{experience.description}</p>
-                      <ul className="flex flex-wrap mt-2">
-                        {experience.tools &&
-                          experience.tools.map((tool, i) => (
-                            <li key={`tool${i.toString()}`}>
-                              <Pill text={tool} />
-                            </li>
-                          ))}
-                      </ul>
-                    </div>
-                  </div>
-                );
-              })}
+              {experiences && <ExperienceList experiences={experiences.data} />}
             </section>
             <section id="projects" className="py-12">
               <h3
@@ -94,7 +57,7 @@ export default function Home() {
               >
                 Projects
               </h3>
-              {projects.map((project, i) => {
+              {/* {projects.map((project, i) => {
                 return (
                   <div
                     key={`project${i.toString()}`}
@@ -102,9 +65,14 @@ export default function Home() {
                   >
                     <div className="md:col-span-6">
                       <h4
-                        className={`${karla.className} hover:underline font-medium tracking-tight text-xl`}
+                        className={`${karla.className} font-medium tracking-tight text-xl`}
                       >
-                        <a href={project.url} target="_blank" rel="noreferrer">
+                        <a
+                          className="hover:underline"
+                          href={project.url}
+                          target="_blank"
+                          rel="noreferrer"
+                        >
                           {project.title}{' '}
                         </a>
                       </h4>
@@ -127,7 +95,7 @@ export default function Home() {
                     />
                   </div>
                 );
-              })}
+              })} */}
             </section>
             <footer className="py-12 lg:pb-0">
               <small>
