@@ -4,6 +4,9 @@ import instagramIcon from '../../../public/images/logo-instagram.svg';
 import { socialMediaLink, navigationLink } from '../models/links';
 
 export default function useAppData() {
+  const subtitle = `I build apps with React.`;
+  const about = `Experienced software developer with a background in both back-end and front-end development, including React and .NET technologies. I enjoy the creativity and stimulation of coding, and thrive on the collaborative benefits of working in an agile environment. Seeking a new position to continue learning and development.`;
+
   const socialMediaLinks: socialMediaLink[] = [
     {
       icon: githubIcon,
@@ -37,5 +40,5 @@ export default function useAppData() {
     },
   ];
 
-  return { socialMediaLinks, navigationLinks };
+  return { socialMediaLinks, navigationLinks, subtitle, about };
 }
