@@ -47,7 +47,7 @@ export default async function Home() {
 
   return (
     <>
-een max-w-screen-xl mx-auto px-6">
+      <div className="min-h-screen max-w-screen-xl mx-auto px-6">
         <div className="lg:flex lg:gap-8 lg:justify-between">
           <Header />
           <main className="lg:w-1/2 lg:py-24 ">
