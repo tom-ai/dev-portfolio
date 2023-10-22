@@ -5,7 +5,8 @@ import { Karla } from 'next/font/google';
 import Header from './components/header/Header';
 import useAppData from './hooks/useAppData';
 import ExperienceList from './components/ExperienceList';
-import { WorkExperience } from './models/strapi/models';
+import { WorkExperience, Project } from './models/strapi/models';
+import ProjectsList from './components/ProjectsList';
 
 const karla = Karla({ subsets: ['latin'] });
 
@@ -23,19 +24,34 @@ async function getExperiences(): Promise<{ data: WorkExperience[] }> {
   return res.json();
 }
 
+async function getProjects(): Promise<{ data: Project[] }> {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_STRAPI_URL}/projects?populate=*`,
+    {
+      cache: 'no-store',
+    }
+  );
+
+  if (!res.ok) {
+    throw new Error('Failed to fetch projects');
+  }
+
+  return res.json();
+}
+
 export default async function Home() {
   const { about } = useAppData();
 
   const experiences = await getExperiences();
+  const projects = await getProjects();
 
-  console.log(experiences.data);
   return (
     <>
-      <div className="min-h-screen max-w-screen-xl mx-auto px-6">
+een max-w-screen-xl mx-auto px-6">
         <div className="lg:flex lg:gap-8 lg:justify-between">
           <Header />
-          <main className="lg:w-1/2 lg:py-24">
-            <section id="about" className="py-12 lg:pt-0">
+          <main className="lg:w-1/2 lg:py-24 ">
+            <section id="about" className="py-12 lg:pt-0 ">
               <h3
                 className={`${karla.className} lg:hidden  mb-6 text-md tracking-widest uppercase font-bold `}
               >
@@ -57,45 +73,7 @@ export default async function Home() {
               >
                 Projects
               </h3>
-              {/* {projects.map((project, i) => {
-                return (
-                  <div
-                    key={`project${i.toString()}`}
-                    className="mb-12 last:mb-0 md:grid md:grid-cols-8 md:gap-4"
-                  >
-                    <div className="md:col-span-6">
-                      <h4
-                        className={`${karla.className} font-medium tracking-tight text-xl`}
-                      >
-                        <a
-                          className="hover:underline"
-                          href={project.url}
-                          target="_blank"
-                          rel="noreferrer"
-                        >
-                          {project.title}{' '}
-                        </a>
-                      </h4>
-                      <p className="mt-2">{project.description}</p>
-                      <ul className="flex flex-wrap mt-2">
-                        {project.tools &&
-                          project.tools.map((tool, j) => (
-                            <li key={`tool${j}`}>
-                              <Pill text={tool} />
-                            </li>
-                          ))}
-                      </ul>
-                    </div>
-                    <Image
-                      src={project.imageUrl}
-                      alt={project.title}
-                      width={150}
-                      height={100}
-                      className="md:col-span-2 md:order-first mt-4 rounded-md border-enchantedMeadow-700 border-2"
-                    />
-                  </div>
-                );
-              })} */}
+              {projects && <ProjectsList projects={projects.data} />}
             </section>
             <footer className="py-12 lg:pb-0">
               <small>
