@@ -13,7 +13,7 @@ const karla = Karla({ subsets: ['latin'] });
 async function getExperiences(): Promise<{ data: WorkExperience[] }> {
   // udpate to revalidate every 1 hour
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_STRAPI_URL}/work-experiences?populate=*`,
+    `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/work-experiences?populate=*`,
     {
       cache: 'no-cache',
     }
@@ -26,7 +26,7 @@ async function getExperiences(): Promise<{ data: WorkExperience[] }> {
 
 async function getProjects(): Promise<{ data: Project[] }> {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_STRAPI_URL}/projects?populate=*`,
+    `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/projects?populate=*`,
     {
       cache: 'no-store',
     }
