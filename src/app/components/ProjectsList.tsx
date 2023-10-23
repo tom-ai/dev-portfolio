@@ -7,6 +7,8 @@ const karla = Karla({ subsets: ['latin'] });
 
 export default function ProjectsList({ projects }: { projects: Project[] }) {
   return projects.map((project, i) => {
+    if (project.attributes.image?.data)
+      console.log(project.attributes.image?.data.attributes.url);
     return (
       <div
         key={`project${i.toString()}`}
@@ -35,6 +37,23 @@ export default function ProjectsList({ projects }: { projects: Project[] }) {
               ))}
           </ul>
         </div>
+
+        <Image
+          src={
+            project.attributes.image?.data
+              ? 'http://127.0.0.1:1337' +
+                project.attributes.image?.data.attributes.url
+              : ''
+          }
+          alt={
+            project.attributes.image?.data
+              ? project.attributes.image?.data.attributes.alternativeText
+              : ''
+          }
+          width={150}
+          height={100}
+        />
+
         {/* <Image
           src={project.attributes.imageUrl}
           alt={project.title}
