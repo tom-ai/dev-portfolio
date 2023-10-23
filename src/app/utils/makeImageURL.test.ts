@@ -1,7 +1,7 @@
 import { makeImageURL } from './makeImageURL';
 
 describe('makeImageURL', () => {
-  it('returns null if domain is undefined', () => {
+  it('returns empty string if domain is undefined', () => {
     const url = makeImageURL('/uploads/test.jpg', undefined);
 
     expect(url).toBeNull();
