@@ -49,11 +49,15 @@ export default async function ExperienceList({
           <p className="mt-2">{experience.attributes.description}</p>
           <ul className="flex flex-wrap mt-2">
             {experience.attributes.tools &&
-              experience.attributes.tools.data.map((tool) => (
-                <li key={tool.id}>
-                  <Pill text={tool.attributes.name} />
-                </li>
-              ))}
+              experience.attributes.tools.data
+                .sort((a, b) =>
+                  a.attributes.name.localeCompare(b.attributes.name)
+                )
+                .map((tool) => (
+                  <li key={tool.id}>
+                    <Pill text={tool.attributes.name} />
+                  </li>
+                ))}
           </ul>
         </div>
       </div>

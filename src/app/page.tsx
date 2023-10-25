@@ -50,8 +50,8 @@ export default async function Home() {
       <div className="min-h-screen max-w-screen-xl mx-auto px-6">
         <div className="lg:flex lg:gap-8 lg:justify-between">
           <Header />
-          <main className="lg:w-1/2 lg:py-24 ">
-            <section id="about" className="py-12 lg:pt-0 ">
+          <main className="lg:w-1/2 lg:py-24 snap-y snap-mandatory ">
+            <section id="about" className="py-12 lg:pt-0 snap-start ">
               <h3
                 className={`${karla.className} lg:hidden  mb-6 text-md tracking-widest uppercase font-bold `}
               >
@@ -59,7 +59,7 @@ export default async function Home() {
               </h3>
               <p>{about}</p>
             </section>
-            <section id="experience" className="py-12">
+            <section id="experience" className="py-12 snap-start">
               <h3
                 className={`${karla.className} mb-6 text-md tracking-widest uppercase font-bold `}
               >
@@ -67,7 +67,7 @@ export default async function Home() {
               </h3>
               {experiences && <ExperienceList experiences={experiences.data} />}
             </section>
-            <section id="projects" className="py-12">
+            <section id="projects" className="py-12 snap-start">
               <h3
                 className={`${karla.className} mb-6 text-md tracking-widest uppercase font-bold`}
               >
