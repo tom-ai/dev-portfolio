@@ -5,6 +5,7 @@ export interface navigationLink {
 
 export interface socialMediaLink {
   url: string;
-  icon: HTMLImageElement;
+  icon?: HTMLImageElement;
   alt: string;
+  svg: string;
 }

@@ -11,20 +11,23 @@ export default function ProjectsList({ projects }: { projects: Project[] }) {
     <ul>
       {projects.map((project, i) => {
         return (
-          <li key={`project${i.toString()}`} className="mb-8">
+          <li
+            key={`project${i.toString()}`}
+            className="mb-12 rounded-lg hover:bg-stone-800/10"
+          >
             <a
-              className="mb-18 group block last:mb-0 md:grid md:grid-cols-8 md:gap-4"
+              className="mb-18 group block p-6 last:mb-0 md:grid md:grid-cols-8 md:gap-4 md:p-4"
               href={project.url}
-              target="_blank"
               rel="noreferrer"
             >
-              <div className="relative h-48 w-full md:col-span-2 md:mt-1 md:h-full">
+              <div className="relative h-48 w-full rounded-md md:col-span-2 md:h-full">
                 {project.imageUrl ? (
                   <Image
                     src={project.imageUrl}
                     alt={project.description}
                     fill
                     className="object-cover"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw"
                   />
                 ) : (
                   <Image
@@ -32,6 +35,7 @@ export default function ProjectsList({ projects }: { projects: Project[] }) {
                     alt="fallback image"
                     fill
                     className="object-cover opacity-50"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw"
                   />
                 )}
               </div>

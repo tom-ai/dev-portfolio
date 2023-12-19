@@ -1,13 +1,13 @@
-import { Karla, JetBrains_Mono } from "next/font/google";
+import { Karla } from "next/font/google";
 import Header from "./components/header/Header";
 import ExperienceList from "./components/ExperienceList";
 import ProjectsList from "./components/ProjectsList";
 import useAppData from "./hooks/useAppData";
 import useProjects from "./hooks/useProjects";
 import useExperience from "./hooks/useExperience";
+import SectionHeading from "./components/SectionHeading";
 
 const karla = Karla({ subsets: ["latin"] });
-const jetBrains = JetBrains_Mono({ subsets: ["latin"] });
 
 export default async function Home() {
   const { about } = useAppData();
@@ -17,32 +17,20 @@ export default async function Home() {
 
   return (
     <>
-      <div className="mx-auto min-h-screen max-w-screen-xl px-6">
+      <div className="mx-auto min-h-screen max-w-screen-xl px-6 lg:px-12">
         <div className="lg:flex lg:justify-between lg:gap-8">
           <Header />
-          <main className="lg:w-2/3 lg:py-24 ">
+          <main className="lg:w-2/3 lg:py-24">
             <section id="about" className="py-12 lg:pt-0 ">
-              <h3
-                className={`${jetBrains.className} text-md  mb-6 font-bold uppercase tracking-widest lg:hidden `}
-              >
-                About
-              </h3>
+              <SectionHeading text="About" hiddenOnLg />
               <p>{about}</p>
             </section>
             <section id="experience" className="py-12">
-              <h3
-                className={`${karla.className} text-md mb-6 font-bold uppercase tracking-widest `}
-              >
-                Experience
-              </h3>
+              <SectionHeading text="Experience" />
               {experiences && <ExperienceList experiences={experiences} />}
             </section>
             <section id="projects" className="py-12">
-              <h3
-                className={`${karla.className} text-md mb-6 font-bold uppercase tracking-widest`}
-              >
-                Projects
-              </h3>
+              <SectionHeading text="Projects" />
               {projects && <ProjectsList projects={projects} />}
             </section>
             <footer className="py-12 lg:pb-0">

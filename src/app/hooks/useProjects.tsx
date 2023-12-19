@@ -7,7 +7,6 @@ export default function (): Project[] {
     description: "A Next.js developer portfolio.",
     tools: ["Next.js", "Tailwind CSS", "TypeScript"],
     url: "https://github.com/tom-ai/dev-portfolio",
-    imageUrl: "https://source.unsplash.com/random",
   };
 
   const linkShortener: Project = {
@@ -16,7 +15,6 @@ export default function (): Project[] {
     description: "A simple link generator built with React and TypeScript.",
     tools: ["React", "TypeScript", "Jest", "React Testing Library"],
     url: "https://github.com/tom-ai/link-shortener",
-    imageUrl: "https://source.unsplash.com/random",
   };
 
   const ncNews: Project = {

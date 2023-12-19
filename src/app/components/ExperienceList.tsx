@@ -1,8 +1,9 @@
-import { Experience } from '../models/experience';
-import { Karla } from 'next/font/google';
-import Pill from './Pill';
+import { Experience } from "../models/experience";
+import { Karla } from "next/font/google";
+import Pill from "./Pill";
+import TextLink from "./TextLink";
 
-const karla = Karla({ subsets: ['latin'] });
+const karla = Karla({ subsets: ["latin"] });
 
 export default async function ExperienceList({
   experiences,
@@ -17,36 +18,33 @@ export default async function ExperienceList({
       >
         <p
           className={
-            'md:col-span-2 mt-1 mb-2 uppercase text-sm font-bold text-enchantedMeadow-800 cursor-default'
+            "mb-2 mt-1 cursor-default text-sm font-bold uppercase text-stone-500 md:col-span-2"
           }
         >
-          {new Date(experience.from).toLocaleDateString('en-GB', {
-            month: 'short',
-            year: 'numeric',
-          })}{' '}
-          -{' '}
+          {new Date(experience.from).toLocaleDateString("en-GB", {
+            month: "short",
+            year: "numeric",
+          })}{" "}
+          -{" "}
           {experience.current
-            ? 'Present'
-            : new Date(experience.to).toLocaleDateString('en-GB', {
-                month: 'short',
-                year: 'numeric',
+            ? "Present"
+            : new Date(experience.to).toLocaleDateString("en-GB", {
+                month: "short",
+                year: "numeric",
               })}
         </p>
         <div className="md:col-span-6">
           <h4
-            className={`${karla.className} font-medium tracking-tight text-xl`}
+            className={`${karla.className} text-xl font-medium tracking-tight`}
           >
-            <a
-              className="hover:underline"
-              href={experience.url}
-              target="_blank"
-              rel="noreferrer"
-            >
-              {experience.title} {'•'} {experience.company}
-            </a>
+            {experience.title} {"•"} {experience.company}
           </h4>
           <p className="mt-2">{experience.description}</p>
-          <ul className="flex flex-wrap mt-2">
+          <br />
+
+          <TextLink url={experience.url} />
+
+          <ul className="mt-2 flex flex-wrap">
             {experience.tools &&
               experience.tools
                 .sort((a, b) => a.localeCompare(b))
