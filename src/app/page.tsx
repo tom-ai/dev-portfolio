@@ -1,13 +1,9 @@
-import useProjects from "./hooks/useProjects";
-import Pill from "./components/Pill";
-import Image from "next/image";
 import { Karla, JetBrains_Mono } from "next/font/google";
 import Header from "./components/header/Header";
-import useAppData from "./hooks/useAppData";
 import ExperienceList from "./components/ExperienceList";
-import { WorkExperience, Project } from "./models/strapi/models";
 import ProjectsList from "./components/ProjectsList";
-import { Experience } from "./models/experience";
+import useAppData from "./hooks/useAppData";
+import useProjects from "./hooks/useProjects";
 import useExperience from "./hooks/useExperience";
 
 const karla = Karla({ subsets: ["latin"] });
@@ -59,7 +55,6 @@ export default async function Home() {
           </main>
         </div>
       </div>
-      <div className="background-pattern"></div>
     </>
   );
 }
