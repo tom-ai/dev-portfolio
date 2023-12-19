@@ -1,12 +1,12 @@
-import './globals.css';
-import type { Metadata } from 'next';
-import { Inconsolata } from 'next/font/google';
+import "./globals.css";
+import type { Metadata } from "next";
+import { Inconsolata } from "next/font/google";
 
-const inconsolata = Inconsolata({ subsets: ['latin'] });
+const inconsolata = Inconsolata({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: 'Tom Harris',
-  description: 'Developer portfolio for Tom Harris',
+  title: "Tom Harris",
+  description: "Developer portfolio for Tom Harris",
 };
 
 export default function RootLayout({
@@ -17,7 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inconsolata.className} selection:bg-enchantedMeadow-800 selection:text-enchantedMeadow-100 antialiased text-black bg-enchantedMeadow-300 `}
+        className={`${inconsolata.className} bg-enchantedMeadow-300 text-black antialiased selection:bg-enchantedMeadow-800 selection:text-enchantedMeadow-100 `}
       >
         {children}
       </body>
