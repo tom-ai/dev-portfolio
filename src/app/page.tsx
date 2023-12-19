@@ -1,49 +1,23 @@
 import useProjects from './hooks/useProjects';
 import Pill from './components/Pill';
 import Image from 'next/image';
-import { Karla } from 'next/font/google';
+import { Karla, JetBrains_Mono } from 'next/font/google';
 import Header from './components/header/Header';
 import useAppData from './hooks/useAppData';
 import ExperienceList from './components/ExperienceList';
 import { WorkExperience, Project } from './models/strapi/models';
 import ProjectsList from './components/ProjectsList';
+import { Experience } from './models/experience';
+import useExperience from './hooks/useExperience';
 
 const karla = Karla({ subsets: ['latin'] });
-
-async function getExperiences(): Promise<{ data: WorkExperience[] }> {
-  // udpate to revalidate every 1 hour
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/work-experiences?populate=*`,
-    {
-      cache: 'no-cache',
-    }
-  );
-  if (!res.ok) {
-    throw new Error('Failed to fetch experiences');
-  }
-  return res.json();
-}
-
-async function getProjects(): Promise<{ data: Project[] }> {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_STRAPI_URL}/api/projects?populate=*`,
-    {
-      cache: 'no-store',
-    }
-  );
-
-  if (!res.ok) {
-    throw new Error('Failed to fetch projects');
-  }
-
-  return res.json();
-}
+const jetBrains = JetBrains_Mono({ subsets: ['latin'] });
 
 export default async function Home() {
   const { about } = useAppData();
 
-  const experiences = await getExperiences();
-  const projects = await getProjects();
+  const experiences = await useExperience();
+  const projects = await useProjects();
 
   return (
     <>
@@ -53,7 +27,7 @@ export default async function Home() {
           <main className="lg:w-1/2 lg:py-24 snap-y snap-mandatory ">
             <section id="about" className="py-12 lg:pt-0 snap-start ">
               <h3
-                className={`${karla.className} lg:hidden  mb-6 text-md tracking-widest uppercase font-bold `}
+                className={`${jetBrains.className} lg:hidden  mb-6 text-md tracking-widest uppercase font-bold `}
               >
                 About
               </h3>
@@ -65,7 +39,7 @@ export default async function Home() {
               >
                 Experience
               </h3>
-              {experiences && <ExperienceList experiences={experiences.data} />}
+              {experiences && <ExperienceList experiences={experiences} />}
             </section>
             <section id="projects" className="py-12 snap-start">
               <h3
@@ -73,7 +47,7 @@ export default async function Home() {
               >
                 Projects
               </h3>
-              {projects && <ProjectsList projects={projects.data} />}
+              {projects && <ProjectsList projects={projects} />}
             </section>
             <footer className="py-12 lg:pb-0">
               <small>

@@ -1,4 +1,4 @@
-import { WorkExperience } from '../models/strapi/models';
+import { Experience } from '../models/experience';
 import { Karla } from 'next/font/google';
 import Pill from './Pill';
 
@@ -7,7 +7,7 @@ const karla = Karla({ subsets: ['latin'] });
 export default async function ExperienceList({
   experiences,
 }: {
-  experiences: WorkExperience[];
+  experiences: Experience[];
 }) {
   return experiences.map((experience) => {
     return (
@@ -20,14 +20,14 @@ export default async function ExperienceList({
             'md:col-span-2 mt-1 mb-2 uppercase text-sm font-bold text-enchantedMeadow-800 cursor-default'
           }
         >
-          {new Date(experience.attributes.from).toLocaleDateString('en-GB', {
+          {new Date(experience.from).toLocaleDateString('en-GB', {
             month: 'short',
             year: 'numeric',
           })}{' '}
           -{' '}
-          {experience.attributes.current
+          {experience.current
             ? 'Present'
-            : new Date(experience.attributes.to).toLocaleDateString('en-GB', {
+            : new Date(experience.to).toLocaleDateString('en-GB', {
                 month: 'short',
                 year: 'numeric',
               })}
@@ -38,24 +38,21 @@ export default async function ExperienceList({
           >
             <a
               className="hover:underline"
-              href={experience.attributes.url}
+              href={experience.url}
               target="_blank"
               rel="noreferrer"
             >
-              {experience.attributes.title} {'•'}{' '}
-              {experience.attributes.company}
+              {experience.title} {'•'} {experience.company}
             </a>
           </h4>
-          <p className="mt-2">{experience.attributes.description}</p>
+          <p className="mt-2">{experience.description}</p>
           <ul className="flex flex-wrap mt-2">
-            {experience.attributes.tools &&
-              experience.attributes.tools.data
-                .sort((a, b) =>
-                  a.attributes.name.localeCompare(b.attributes.name)
-                )
-                .map((tool) => (
-                  <li key={tool.id}>
-                    <Pill text={tool.attributes.name} />
+            {experience.tools &&
+              experience.tools
+                .sort((a, b) => a.localeCompare(b))
+                .map((tool, id) => (
+                  <li key={`tool${id.toString()}`}>
+                    <Pill text={tool} />
                   </li>
                 ))}
           </ul>

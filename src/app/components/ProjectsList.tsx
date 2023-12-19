@@ -1,8 +1,7 @@
-import { Project } from '../models/strapi/models';
+import { Project } from '../models/project';
 import { Karla } from 'next/font/google';
 import Pill from './Pill';
 import Image from 'next/image';
-import { makeImageURL } from '../utils/makeImageURL';
 import fallback from '../../../public/images/fallback.png';
 
 const karla = Karla({ subsets: ['latin'] });
@@ -15,20 +14,15 @@ export default function ProjectsList({ projects }: { projects: Project[] }) {
           <li key={`project${i.toString()}`}>
             <a
               className="group block mb-18 last:mb-0 md:grid md:grid-cols-8 md:gap-4"
-              href={project.attributes.codeUrl}
+              href={project.url}
               target="_blank"
               rel="noreferrer"
             >
               <div className="relative w-full h-48 md:col-span-2 md:h-full md:mt-1">
-                {project.attributes.image?.data ? (
+                {project.imageUrl ? (
                   <Image
-                    src={makeImageURL(
-                      project.attributes.image.data.attributes.url,
-                      process.env.NEXT_PUBLIC_STRAPI_URL
-                    )}
-                    alt={
-                      project.attributes.image?.data.attributes.alternativeText
-                    }
+                    src={project.imageUrl}
+                    alt={project.description}
                     fill
                     className="object-cover"
                   />
@@ -45,18 +39,16 @@ export default function ProjectsList({ projects }: { projects: Project[] }) {
                 <h4
                   className={`${karla.className} font-medium tracking-tight text-xl mt-4 md:mt-0`}
                 >
-                  <p>{project.attributes.title} </p>
+                  <p>{project.title} </p>
                 </h4>
-                <p className="mt-2">{project.attributes.description}</p>
+                <p className="mt-2">{project.description}</p>
                 <ul className="flex flex-wrap mt-2">
-                  {project.attributes.tools &&
-                    project.attributes.tools.data
-                      .sort((a, b) =>
-                        a.attributes.name.localeCompare(b.attributes.name)
-                      )
+                  {project.tools &&
+                    project.tools
+                      .sort((a, b) => a.localeCompare(b))
                       .map((tool, j) => (
                         <li key={`tool${j}`}>
-                          <Pill text={tool.attributes.name} />
+                          <Pill text={tool} />
                         </li>
                       ))}
                 </ul>
