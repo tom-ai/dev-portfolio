@@ -13,7 +13,7 @@ export default function ProjectsList({ projects }: { projects: Project[] }) {
         return (
           <li
             key={`project${i.toString()}`}
-            className="mb-12 rounded-lg hover:bg-stone-800/10"
+            className="mb-12 rounded-lg hover:bg-stone-800/10 dark:hover:bg-stone-200/10"
           >
             <a
               className="mb-18 group block p-6 last:mb-0 md:grid md:grid-cols-8 md:gap-4 md:p-4"

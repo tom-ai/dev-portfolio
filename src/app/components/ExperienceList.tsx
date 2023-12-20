@@ -18,7 +18,7 @@ export default async function ExperienceList({
       >
         <p
           className={
-            "mb-2 mt-1 cursor-default text-sm font-bold uppercase text-stone-500 md:col-span-2"
+            "mb-2 mt-1 cursor-default text-sm font-bold uppercase text-stone-500 dark:text-stone-400 md:col-span-2"
           }
         >
           {new Date(experience.from).toLocaleDateString("en-GB", {

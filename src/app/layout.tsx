@@ -17,7 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inconsolata.className} bg-stone-100 text-black antialiased selection:bg-stone-800 selection:text-stone-100 dark:bg-stone-800 dark:text-white `}
+        className={`${inconsolata.className} bg-stone-100 text-black antialiased selection:bg-stone-800 selection:text-stone-100 dark:bg-stone-800 dark:text-white dark:selection:bg-stone-300 dark:selection:text-stone-800`}
       >
         {children}
       </body>
