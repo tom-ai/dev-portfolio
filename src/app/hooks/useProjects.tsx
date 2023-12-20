@@ -27,7 +27,23 @@ export default function (): Project[] {
       "https://github.com/tom-ai/th-news/blob/main/src/assets/th-news-1.png?raw=true",
   };
 
-  const projects: Project[] = [developerPortfolio, linkShortener, ncNews];
+  const sophiaDignam: Project = {
+    id: 3,
+    title: "Sophia Dignam",
+    description:
+      "Portfolio website for viola and violin session musician, Sophia Dignam.",
+    tools: ["GraphQL", "TypeScript", "Tailwind CSS", "React"],
+    url: "http://session-musician-sd.vercel.app",
+    imageUrl:
+      "https://sophia-aws-s3-images-bucket.s3.eu-west-2.amazonaws.com/IMG_2765_9a5db51c06.JPG",
+  };
+
+  const projects: Project[] = [
+    sophiaDignam,
+    developerPortfolio,
+    linkShortener,
+    ncNews,
+  ];
 
   return projects;
 }
